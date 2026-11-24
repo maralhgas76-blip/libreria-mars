@@ -1,0 +1,496 @@
+/* 1. VARIABLES Y RESET */
+:root {
+    color-scheme: light;
+
+    --color-primary: #8e3ea3;
+    --color-primary-dark: #2a0a3a;
+    --color-acento: #1f6a8a;
+    --color-bg: #f7f3ef;
+    --color-surface: #ffffff;
+    --color-text: #2b2230;
+    --color-text-muted: #675d6e;
+    --color-border: #e8e1ea;
+    --color-on-dark: #e1bee7;
+
+    --font-main: "Segoe UI", Arial, sans-serif;
+    --radius: 8px;
+    --radius-sm: 5px;
+    --shadow-sm: 0 2px 8px rgba(42, 10, 58, 0.10);
+    --shadow-md: 0 8px 20px rgba(42, 10, 58, 0.16);
+    --ancho-contenido: 1100px;
+    --espaciado-base: 16px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-main);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 2. TIPOGRAFÍA */
+
+h1,
+h2,
+h3 {
+    line-height: 1.25;
+}
+
+h2 {
+    color: var(--color-primary-dark);
+    font-size: 1.8rem;
+    margin: 0 0 20px;
+}
+
+h3 {
+    color: var(--color-primary-dark);
+    font-size: 1.2rem;
+}
+
+p {
+    margin: 0 0 12px;
+}
+
+/* 3. ENCABEZADO Y NAVEGACIÓN */
+
+header {
+    background-color: var(--color-primary-dark);
+    color: white;
+    padding: 36px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.4rem;
+    margin: 0;
+}
+
+header p {
+    color: var(--color-on-dark);
+    margin: 8px 0 0;
+}
+
+nav {
+    width: 100%;
+    background-color: var(--color-primary);
+    padding: 6px 20px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul,
+.menu-navegacion {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    border-bottom: 3px solid transparent;
+    transition: background-color 0.2s;
+}
+
+/* Hover sin perder el contraste */
+nav a:hover {
+    background-color: var(--color-primary-dark);
+}
+
+/* Página actual del menú */
+nav a[aria-current="page"] {
+    background-color: var(--color-primary-dark);
+    border-bottom: 3px solid white;
+}
+
+nav a:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 2px;
+}
+
+/* 4. CONTENIDO PRINCIPAL */
+
+main {
+    flex: 1;
+    width: 90%;
+    max-width: var(--ancho-contenido);
+    margin: 40px auto;
+}
+
+.hero,
+.inicio {
+    background-color: var(--color-surface);
+    padding: 36px;
+    border-radius: var(--radius);
+    border-left: 6px solid var(--color-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.hero p,
+.inicio p {
+    color: var(--color-text-muted);
+    max-width: 65ch;
+}
+
+main a {
+    color: var(--color-acento);
+    text-underline-offset: 3px;
+}
+
+main a:hover {
+    color: var(--color-primary-dark);
+}
+
+/* 5. CATÁLOGO Y TARJETAS */
+
+:where(.catalogo, .products-grid, .lista-libros),
+main > ul {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 260px), 1fr)
+    );
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+:where(.catalogo, .products-grid, .lista-libros, main > ul) > *,
+:where(.product-card, .libro) {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 22px;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.25s, border-color 0.25s;
+}
+
+:where(.catalogo, .products-grid, .lista-libros, main > ul) > *:hover,
+:where(.product-card, .libro):hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+}
+
+:where(.product-card, .libro, .catalogo, .products-grid, .lista-libros, main > ul) h3 {
+    color: var(--color-primary-dark);
+    font-size: 1.15rem;
+    margin: 0 0 6px;
+}
+
+:where(.product-card, .libro, .catalogo, .products-grid, .lista-libros, main > ul) p {
+    margin: 0 0 4px;
+    font-size: 0.92rem;
+}
+
+:where(.product-card, .libro, .catalogo, .products-grid, .lista-libros) img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+}
+
+.stock {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+}
+
+.precio,
+.price {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--color-primary-dark);
+}
+
+/* 6. FORMULARIOS Y BOTONES */
+
+form {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+form label {
+    display: block;
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form input[type="password"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: white;
+    color: var(--color-text);
+}
+
+form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+form input:focus-visible,
+form textarea:focus-visible,
+form select:focus-visible {
+    outline: 2px solid var(--color-acento);
+    outline-offset: 2px;
+}
+
+/* Campos inválidos */
+form input:invalid:not(:placeholder-shown),
+form textarea:invalid:not(:placeholder-shown) {
+    border-color: #a61b1b;
+}
+
+/* Texto de ayuda bajo cada campo */
+.ayuda-campo,
+.form-help {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+/* Botones */
+.btn,
+.boton,
+button,
+a.button,
+input[type="submit"] {
+    display: inline-block;
+    background-color: var(--color-primary-dark);
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    width: fit-content;
+    max-width: 100%;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:hover,
+.boton:hover,
+button:hover,
+a.button:hover,
+input[type="submit"]:hover {
+    background-color: var(--color-acento);
+    color: white;
+}
+
+.btn:active,
+.boton:active,
+button:active,
+input[type="submit"]:active {
+    transform: scale(0.97);
+}
+
+.btn:focus-visible,
+.boton:focus-visible,
+button:focus-visible,
+a.button:focus-visible,
+input[type="submit"]:focus-visible {
+    outline: 3px solid var(--color-acento);
+    outline-offset: 3px;
+}
+
+button:disabled,
+input[type="submit"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+main a.btn,
+main a.boton,
+main a.button,
+main a.btn:hover,
+main a.boton:hover,
+main a.button:hover {
+    color: white;
+    text-decoration: none;
+}
+
+:where(.product-card, .libro, .catalogo, .products-grid, .lista-libros, main > ul)
+:is(.btn, .boton, button) {
+    margin-top: auto;
+}
+
+/* 7. DETALLE DEL LIBRO Y MIGAS DE PAN */
+
+.migas-pan {
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.migas-pan a {
+    color: var(--color-acento);
+}
+
+.detalle-libro {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+}
+
+/* 8. PIE DE PÁGINA Y CONTACTO */
+
+footer {
+    background-color: var(--color-primary-dark);
+    color: var(--color-on-dark);
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0;
+}
+
+.contacto-info {
+    text-align: center;
+    margin: 24px auto;
+}
+
+.contacto-info a {
+    color: var(--color-acento);
+}
+
+/* 9. DISEÑO RESPONSIVE */
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    main {
+        width: 94%;
+        margin: 25px auto;
+    }
+
+    .hero,
+    .inicio {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 24px 15px;
+    }
+
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    nav {
+        padding: 4px 5px;
+    }
+
+    nav ul,
+    .menu-navegacion {
+        gap: 2px 8px;
+    }
+
+    nav a {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+
+    main {
+        margin: 20px auto;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero,
+    .inicio {
+        padding: 20px;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    .detalle-libro {
+        padding: 18px;
+    }
+}
+
+/* 10. MOVIMIENTO REDUCIDO */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+}
