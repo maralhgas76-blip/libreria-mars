@@ -23,7 +23,7 @@ function mostrarDisponibilidad(Producto $producto): string
     return '<p class="disponibilidad agotado">Agotado</p>';
 }
 
-function mostrarTarjetaProducto(Producto $producto): void
+function mostrarTarjetaProducto(Producto $producto, string $paginaDetalle = 'producto-detalle.php'): void
 {
     ?>
     <article>
